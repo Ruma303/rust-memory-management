@@ -1,32 +1,45 @@
 fn main() {
-    //% Dereferencing
+   //% Ownership
 
-    let x = 5;
-    let y = &x; // y è un riferimento a x
+    /* let s1 = String::from("ciao");
+    let s2 = s1;
 
-    assert_eq!(5, x);
-    assert_eq!(5, *y);
-    println!("{x}, {y}"); // 5, 5
+    let s1 = String::from("nuovo valore");
+    println!("Valore di s1: {}", s1); // nuovo valore
+    println!("Valore di s2: {}", s2); // ciao */
 
-    //, Dereferencing con Mutabilità
 
-    let mut data : i32 = 42;
-    let ref1 : &mut i32 = &mut data;
-    let deref_ref1 : i32 = *ref1 + 10;
-    println!("{ref1}, {deref_ref1}" ); // 42, 52
+    //, Deep copy
+    /* let mut s1 = String::from("ciao");
+    let mut s2 = s1.clone();
+    println!("Valore di s1: {}", s1); // ciao
+    println!("Valore di s2: {}", s2); // ciao
 
-    //, Deref non possibile
-    let mut data : Vec<i32> = vec![1,2,3];
-    let ref1 : &mut Vec<i32> = &mut data;
+    s1 = String::from("Hello");
+    println!("Valore di s1: {}", s1); // Hello
+    s2 = String::from("World");
+    println!("Valore di s2: {}", s2); // World */
 
-    //let deref_ref1 : Vec<i32> = *ref1; //. Errore
 
-    //? Clonare i dati invece di tentare di spostarli
-    let deref_ref1: Vec<i32> = ref1.clone();
-    println!("{:?}, {:?}", ref1, deref_ref1); // [1, 2, 3], [1, 2, 3]
+    //, Scope ownership
+    /* let s1 = String::from("ciao");
+    {
+        let s2 = s1;
+        println!("Valore di s2{}", s2); // Qui s2 è accessibile
+     }
+    println!("Valore di s2{}", s2);  */ //. Qui s2 non è raggiungibile
 
-    //, Deref mut non possibile
-    /* let mut data : Vec<i32> = vec![1,2,3];
-    let ref1 : &mut Vec<i32> = &mut data;
-    let deref_ref1 : &mut Vec<i32> = &mut *ref1; */
+
+    //, Ownership dei dati scalari
+    /* let x = 10;
+    let y = x;
+    println!("Valore di x: {}", x); // 10, x è ancora valido e accessibile
+    println!("Valore di y: {}", y); // 10, y ha lo stesso valore di x */
+
+
+}
+
+// Ownership dei dati scalari
+fn sum(x: i32, y: i32) -> i32 {
+    x + y
 }
